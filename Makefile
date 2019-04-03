@@ -12,19 +12,18 @@
 
 NAME=21sh
 HEADER=includes/21sh.h
-SRCS_DIR=./sources
-OBJS_DIR=./objects
+SRCS_DIR=./sources/
+OBJS_DIR=./objects/
 LIBFT_DIR=./libft
-RAW_SRCS=\
+COMMANDS_DIR=commands/
+SRCS_COMMANDS=\
+	ft_cd.c		ft_echo.c		ft_env.c\
+	ft_hash.c	ft_setenv.c		ft_unsetenv.c
+
+SRCS_WITHOUT_DIR=\
 	autocompletion.c\
 	divide_commands.c\
 	environment.c\
-	ft_cd.c\
-	ft_echo.c\
-	ft_env.c\
-	ft_hash.c\
-	ft_setenv.c\
-	ft_unsetenv.c\
 	handle_signals.c\
 	input.c\
 	main.c\
@@ -32,9 +31,11 @@ RAW_SRCS=\
 	spec_split.c\
 	replace_tilde.c
 
-RAW_OBJS=$(RAW_SRCS:.c=.o)
-SRCS=$(addprefix $(SRCS_DIR)/,$(RAW_SRCS))
-OBJS=$(addprefix $(OBJS_DIR)/,$(RAW_OBJS))
+SOURCES=$(SRCS_WITHOUT_DIR)\
+	$(addprefix $(COMMANDS_DIR),$(SRCS_COMMANDS))
+
+SRCS=$(addprefix $(SRCS_DIR),$(SOURCES))
+OBJS=$(addprefix $(OBJS_DIR),$(SOURCES:.c=.o))
 OBJS_CLEAN=$(strip $(foreach f,$(OBJS),$(wildcard $(f))))
 NAME_CLEAN=$(strip $(NAME))
 LIBFT_A=$(LIBFT_DIR)/libft.a
@@ -52,10 +53,10 @@ all: $(NAME)
 
 $(OBJS_DIR):
 	@echo "$(BLUE)Compiling $(NAME_CLEAN) objects files...$(NC)"
-	@mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJS_DIR)$(COMMANDS_DIR)
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADER)
-	@gcc $(INCLUDES) $(FLAGS) -o $@ -c $<
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADER)
+	@gcc $(INCLUDES) $(FLAGS) -c $< -o $@
 
 $(LIBFT_A):
 	@make -C $(LIBFT_DIR)
