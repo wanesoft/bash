@@ -11,33 +11,42 @@
 # **************************************************************************** #
 
 NAME=21sh
+
 HEADER=includes/21sh.h
+
+LIBFT_DIR=./libft
 SRCS_DIR=./sources/
 OBJS_DIR=./objects/
-LIBFT_DIR=./libft
 COMMANDS_DIR=commands/
+LEXER_DIR=lexer/
+
 SRCS_COMMANDS=\
 	ft_cd.c		ft_echo.c		ft_env.c\
 	ft_hash.c	ft_setenv.c		ft_unsetenv.c
 
+SRCS_LEXER=\
+	divide_commands.c\
+	replace_tilde.c\
+	replace_variable.c\
+	spec_split.c
+
 SRCS_WITHOUT_DIR=\
 	autocompletion.c\
-	divide_commands.c\
 	environment.c\
 	handle_signals.c\
 	input.c\
-	main.c\
-	make_string.c\
-	spec_split.c\
-	replace_tilde.c
+	main.c
 
 SOURCES=$(SRCS_WITHOUT_DIR)\
-	$(addprefix $(COMMANDS_DIR),$(SRCS_COMMANDS))
+	$(addprefix $(COMMANDS_DIR),$(SRCS_COMMANDS))\
+	$(addprefix $(LEXER_DIR),$(SRCS_LEXER))
 
 SRCS=$(addprefix $(SRCS_DIR),$(SOURCES))
 OBJS=$(addprefix $(OBJS_DIR),$(SOURCES:.c=.o))
+
 OBJS_CLEAN=$(strip $(foreach f,$(OBJS),$(wildcard $(f))))
 NAME_CLEAN=$(strip $(NAME))
+
 LIBFT_A=$(LIBFT_DIR)/libft.a
 INCLUDES:=-I includes -I $(LIBFT_DIR)/includes
 FLAGS=-Wall -Wextra -Werror
@@ -47,13 +56,14 @@ GREEN=\033[0;32m
 BLUE=\033[0;34m
 NC=\033[0m
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test
 
 all: $(NAME)
 
 $(OBJS_DIR):
 	@echo "$(BLUE)Compiling $(NAME_CLEAN) objects files...$(NC)"
 	@mkdir -p $(OBJS_DIR)$(COMMANDS_DIR)
+	@mkdir -p $(OBJS_DIR)$(LEXER_DIR)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADER)
 	@gcc $(INCLUDES) $(FLAGS) -c $< -o $@
