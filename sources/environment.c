@@ -6,7 +6,7 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 12:52:40 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/01 21:05:37 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/06 18:31:13 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static void	add_command(t_avl_node **root, char *name, char *path)
 	if (!(node = ft_avl_search(*root, (const char *)name)))
 	{
 		*root = ft_avl_insert(*root, name, path);
-		g_commands = (char **)ft_vector_add((void **)g_commands,
-			(void *)ft_strdup(name));
+		// g_commands = (char **)ft_vector_add((void **)g_commands,
+		// 	(void *)ft_strdup(name));
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:30:50 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/01 21:06:13 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/07 00:18:16 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int		main(int ac, char **av, char **source_env)
 
 	(void)ac;
 	(void)av;
-	rl_attempted_completion_function = commands_completion;
+	// rl_attempted_completion_function = commands_completion;
 	env = copy_env(source_env);
 	root = ft_bins_from_env(env);
-	fill_g_commands(root);
+	// fill_g_commands(root);
 	while (1)
 	{
 		if (!read_input(&root, &env))

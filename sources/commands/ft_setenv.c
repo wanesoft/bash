@@ -6,7 +6,7 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 22:04:36 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/01 21:05:58 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/07 00:18:33 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ int			ft_setenv(char **av, char ***env, t_avl_node **root)
 		replace_var(*av, tmp, env);
 		if (ft_strnequ(*av, "PATH=", 5))
 		{
-			ft_free_char_arr(&g_commands);
+			// ft_free_char_arr(&g_commands);
 			ft_avl_iter_post_order(*root, &ft_avl_free_node);
 			*root = ft_bins_from_env(*env);
-			fill_g_commands(*root);
+			// fill_g_commands(*root);
 		}
 		++av;
 	}
