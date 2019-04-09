@@ -35,7 +35,15 @@ SRCS_WITHOUT_DIR=\
 	environment.c\
 	handle_signals.c\
 	input.c\
-	main.c
+	main.c\
+	ft_work_arr.c\
+	ft_work_ev.c\
+	ft_init_ev.c\
+	ft_back_screen.c\
+	ft_autocompl_2.c\
+	ft_autocompl.c\
+	ft_init_screen.c\
+	ft_new_while.c
 
 SOURCES=$(SRCS_WITHOUT_DIR)\
 	$(addprefix $(COMMANDS_DIR),$(SRCS_COMMANDS))\
@@ -73,7 +81,7 @@ $(LIBFT_A):
 
 $(NAME): $(LIBFT_A) $(OBJS_DIR) $(OBJS)
 	@echo "$(BLUE)Compiling executable...$(NC)"
-	@gcc $(OBJS) $(LIBFT_A) $(INCLUDES) $(FLAGS) -o $(NAME) -lreadline
+	@gcc $(OBJS) $(LIBFT_A) $(INCLUDES) $(FLAGS) -o $(NAME) -lreadline -ltermcap
 	@echo "$(GREEN)Bin $(NAME) is ready to use!$(NC)"
 
 clean:
@@ -96,6 +104,6 @@ else
 endif
 
 test:
-	gcc $(FLAGS) -g $(SRCS) -o $(NAME) $(INCLUDES) $(LIBFT_A) -lreadline
+	gcc $(FLAGS) -g $(SRCS) -o $(NAME) $(INCLUDES) $(LIBFT_A) -lreadline -ltermcap
 
 re: fclean all

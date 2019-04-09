@@ -26,10 +26,26 @@
 # include <pwd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/termios.h>
+# include <curses.h>
+# include <term.h>
 
 # include <sys/ioctl.h>
 
-# define BUF_SIZE 256
+# define BUF_SIZE		256
+# define B_SIZE			1024
+# define TESTTT			1
+
+# define K_SPACE		32
+# define K_ESC			27
+# define K_Q			113
+# define K_DOWN			4348699
+# define K_UP			4283163
+# define K_RIGHT		4414235
+# define K_LEFT			4479771
+# define K_ENTER		10
+# define K_DEL			2117294875
+# define K_BACKSP		127
 
 // char	**g_commands;
 
@@ -40,10 +56,17 @@ typedef struct	s_exec
 	struct s_exec	*next;
 }				t_exec;
 
+typedef struct		s_ev
+{
+	char			*key;
+	char			**val;
+	struct s_ev		*next;
+}					t_ev;
+
 t_avl_node		*ft_bins_from_env(char **env);
 char			**copy_env(char **env);
 
-int				read_input(t_avl_node **root, char ***env);
+int				read_input(t_avl_node **root, char ***env, t_ev **ev);
 
 char			**spec_split(char *s, char **env);
 
@@ -66,5 +89,15 @@ void			handle_signals(void);
 void			fill_g_commands(t_avl_node *root);
 char			*commands_generator(const char *text, int state);
 char			**commands_completion(const char *text, int start, int end);
+
+void			ft_init_screen(void);
+char			*ft_new_while(t_ev **ev);
+void			ft_autocompl(t_ev *ev, char str[B_SIZE], int *j);
+void			ft_autocompl_2(char str[B_SIZE], int *j, char **files);
+void			ft_back_screen(struct termios *old);
+void			ft_push_ev(t_ev **frst, char *key, char **val);
+void			ft_del_arr(char **arr);
+void			ft_init_ev(t_ev **ev, char **env);
+int				ft_count_arr(char **arr);
 
 #endif

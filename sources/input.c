@@ -43,24 +43,24 @@
 **}
 */
 
-static char	*get_input_str(void)
-{
-	char	*buf;
-
-	while (1)
-	{
-		buf = readline("$> ");
-		if (!buf)
-			break ;
-		if (ft_strlen(buf))
-		{
-			add_history(buf);
-			return (ft_strdup(buf));
-		}
-		free(buf);
-	}
-	return (NULL);
-}
+//static char	*get_input_str(void)
+//{
+//	char	*buf;
+//
+//	while (1)
+//	{
+//		buf = readline("$> ");
+//		if (!buf)
+//			break ;
+//		if (ft_strlen(buf))
+//		{
+//			add_history(buf);
+//			return (ft_strdup(buf));
+//		}
+//		free(buf);
+//	}
+//	return (NULL);
+//}
 
 static int	print_error_command(char *s)
 {
@@ -115,7 +115,7 @@ static void	call_functions(char **split, char ***env, t_avl_node **root)
 		print_error_command(split[0]);
 }
 
-int			read_input(t_avl_node **root, char ***env)
+int			read_input(t_avl_node **root, char ***env, t_ev **ev)
 {
 	char		**commands;
 	char		**split;
@@ -123,7 +123,7 @@ int			read_input(t_avl_node **root, char ***env)
 	char		*input_str;
 
 	handle_signals();
-	input_str = get_input_str();
+	input_str = ft_new_while(ev);
 	commands = divide_commands(&input_str);
 	tmp = commands;
 	if (tmp)
