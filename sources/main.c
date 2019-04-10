@@ -6,7 +6,7 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:30:50 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/07 00:18:16 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:26:45 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ int					main(int ac, char **av, char **source_env)
 	struct termios	old;
 	t_ev			*ev;
 	t_ev			*trash;
-	
+
 	(void)ac;
 	(void)av;
 	ev = NULL;
-	// rl_attempted_completion_function = commands_completion;
 	env = copy_env(source_env);
 	root = ft_bins_from_env(env);
-	// fill_g_commands(root);
+	fill_g_commands(root);
 	tcgetattr(STDIN_FILENO, &old);
 	ft_init_ev(&ev, source_env);
 	ft_init_screen();
