@@ -73,6 +73,7 @@ static int	call_exec(char *path, char **split, char **env)
 {
 	pid_t	my_pid;
 
+	signal(SIGINT, ft_proc_sig); //rewrite ivan
 	if (!access(path, X_OK))
 	{
 		my_pid = fork();
@@ -122,8 +123,9 @@ int			read_input(t_avl_node **root, char ***env, t_ev **ev)
 	char		**tmp;
 	char		*input_str;
 
-	handle_signals();
+	//handle_signals();
 	input_str = ft_new_while(ev);
+	//ft_putstr(input_str);
 	commands = divide_commands(&input_str);
 	tmp = commands;
 	if (tmp)

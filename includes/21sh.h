@@ -99,5 +99,7 @@ void			ft_push_ev(t_ev **frst, char *key, char **val);
 void			ft_del_arr(char **arr);
 void			ft_init_ev(t_ev **ev, char **env);
 int				ft_count_arr(char **arr);
+void			ft_main_sig(int signo);
+void			ft_proc_sig(int signo);
 
 #endif

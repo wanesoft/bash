@@ -11,23 +11,46 @@
 /* ************************************************************************** */
 
 #include "21sh.h"
+//
+//static void	give_back_the_prompt(int sig)
+//{
+//	if (sig == SIGINT)
+//	{
+//		rl_on_new_line();
+//		rl_redisplay();
+//		rl_cleanup_after_signal();
+//	}
+//	else if (sig == SIGQUIT)
+//	{
+//		exit(0);
+//	}
+//}
+//
+//void		handle_signals(void)
+//{
+//	signal(SIGINT, give_back_the_prompt);
+//	signal(SIGQUIT, give_back_the_prompt);
+//}
 
-static void	give_back_the_prompt(int sig)
+extern char			g_str[B_SIZE];
+extern int			g_j;
+
+void				ft_main_sig(int signo)
 {
-	if (sig == SIGINT)
+	if (signo == SIGINT)
 	{
-		rl_on_new_line();
-		rl_redisplay();
-		rl_cleanup_after_signal();
-	}
-	else if (sig == SIGQUIT)
-	{
-		exit(0);
+		ft_putstr_fd("\n\033[36mWelcome>\033[0m", 1);
+		g_str[0] = '\0';
+		g_j = 0;
+		signal(SIGINT, ft_main_sig);
 	}
 }
 
-void		handle_signals(void)
+void				ft_proc_sig(int signo)
 {
-	signal(SIGINT, give_back_the_prompt);
-	signal(SIGQUIT, give_back_the_prompt);
+	if (signo == SIGINT)
+	{
+		ft_putstr_fd("\n\033[31mabort\033[0m\n", 1);
+		signal(SIGINT, ft_proc_sig);
+	}
 }

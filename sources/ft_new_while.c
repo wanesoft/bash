@@ -70,7 +70,7 @@ char				*ft_new_while(t_ev **ev)
 	g_j = 0;
 	while (1)
 	{
-		//signal(SIGINT, ft_main_sig);
+		signal(SIGINT, ft_main_sig);
 		ft_hello_mess(g_str);
 		read(STDIN_FILENO, &i, 8);
 		if (i == '\n')
