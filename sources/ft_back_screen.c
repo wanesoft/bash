@@ -15,7 +15,7 @@
 void				ft_back_screen(struct termios *old)
 {
 	tcsetattr(STDIN_FILENO, TCSANOW, old);
-	ft_putstr_fd(tgetstr("te", NULL), TESTTT);
-	ft_putstr_fd(tgetstr("ve", NULL), TESTTT);
+	//ft_putstr_fd(tgetstr("te", NULL), TESTTT);
+	//ft_putstr_fd(tgetstr("ve", NULL), TESTTT);
 	ft_putstr_fd("\033[0m", TESTTT);
 }

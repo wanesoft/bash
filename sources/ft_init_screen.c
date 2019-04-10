@@ -23,6 +23,6 @@ void				ft_init_screen(void)
 	new.c_cc[VTIME] = 0;
 	tcsetattr(STDIN_FILENO, TCSADRAIN, &new);
 	tgetent(getenv("TERM"), NULL);
-	ft_putstr_fd(tgetstr("ti", NULL), TESTTT);
-	ft_putstr_fd(tgetstr("vi", NULL), TESTTT);
+	//ft_putstr_fd(tgetstr("ti", NULL), TESTTT);
+	//ft_putstr_fd(tgetstr("vi", NULL), TESTTT);
 }

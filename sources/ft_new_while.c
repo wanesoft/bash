@@ -36,7 +36,7 @@ static void			ft_put_let(char *str, int *g_j, unsigned long i)
 	ft_putstr_fd(tgetstr("cr", NULL), TESTTT);
 }
 
-static void			ft_i_enter(char *str, int *g_j)
+static void			ft_i_enter(char *str)
 {
 	int				i;
 
@@ -46,9 +46,9 @@ static void			ft_i_enter(char *str, int *g_j)
 	while (str[i] == ' ')
 		i++;
 	//ft_minishell(&str[i], ev);
-	str[0] = '\0';
-	*g_j = 0;
-}
+}//	str[0] = '\0';
+//	*g_j = 0;
+
 
 static void			ft_i_bksp(char *str, int *g_j)
 {
@@ -75,7 +75,7 @@ char				*ft_new_while(t_ev **ev)
 		read(STDIN_FILENO, &i, 8);
 		if (i == '\n')
 		{
-			ft_i_enter(g_str, &g_j);
+			ft_i_enter(g_str);
 			return (g_str);
 		}
 		else if (i == K_ESC)

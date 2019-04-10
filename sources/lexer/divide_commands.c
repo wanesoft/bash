@@ -43,7 +43,7 @@ char		**divide_commands(char **str)
 	if (!*str)
 		return (arr);
 	s = ft_strtrim(*str);
-	free(*str);
+	//free(*str);
 	if ((*str = s) == s && *s)
 	{
 		tmp = s;
