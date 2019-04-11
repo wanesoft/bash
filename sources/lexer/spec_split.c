@@ -6,7 +6,7 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 16:47:53 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/01 21:06:24 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/11 18:59:22 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ int			has_str_in_quotes(char *s)
 	return (0);
 }
 
-char		*make_str_in_quotes(char *s, char ***arr, char *tmp)
+char		*make_str_in_quotes(char *s, char ***arr, char *tmp, char **env)
 {
 	char	*str;
 	char	*p;
 	char	c;
+	int		has_tilde;
 
+	has_tilde = (*s == '~') ? 1 : 0;
 	str = ft_strnew(0);
 	while ((c = *s) && !ft_is_whitespaces(c))
 	{
@@ -58,34 +60,36 @@ char		*make_str_in_quotes(char *s, char ***arr, char *tmp)
 		else
 			++s;
 	}
+	str = (has_tilde) ? replace_tilde(str + 1, env, NULL) : str;
 	if (ft_strlen(str))
 		*arr = (char **)ft_vector_add((void **)*arr, (void *)str);
 	return (s);
 }
 
-static int	replace_tilde_in_av(char **arr, char **env)
-{
-	char	*tmp;
+// static int	replace_tilde_in_av(char **arr, char **env)
+// {
+// 	char	*tmp;
 
-	while (*arr)
-	{
-		if (**arr == '~')
-		{
-			tmp = *arr;
-			*arr = replace_tilde(*arr + 1, env, NULL);
-			free(tmp);
-			if (!*arr)
-				return (0);
-		}
-		++arr;
-	}
-	return (1);
-}
+// 	while (*arr)
+// 	{
+// 		if (**arr == '~')
+// 		{
+// 			tmp = *arr;
+// 			*arr = replace_tilde(*arr + 1, env, NULL);
+// 			free(tmp);
+// 			if (!*arr)
+// 				return (0);
+// 		}
+// 		++arr;
+// 	}
+// 	return (1);
+// }
 
 char		**spec_split(char *s, char **env)
 {
 	char	**arr;
 	char	*tmp;
+	char	*substr;
 
 	arr = (char **)malloc(sizeof(char *));
 	arr[0] = NULL;
@@ -97,15 +101,16 @@ char		**spec_split(char *s, char **env)
 		else
 			return (arr);
 		if (has_str_in_quotes(s))
-			s = make_str_in_quotes(s, &arr, tmp);
+			s = make_str_in_quotes(s, &arr, tmp, env);
 		else
 		{
 			s = get_whitespace(s);
-			arr = (char **)ft_vector_add((void **)arr,
-										(void *)ft_strsub(tmp, 0, s - tmp));
+			substr = ft_strsub(tmp, 0, s - tmp);
+			substr = (*substr == '~') ? replace_tilde(substr + 1, env, NULL) : substr;
+			arr = (char **)ft_vector_add((void **)arr, (void *)substr);
 		}
 	}
-	if (!replace_tilde_in_av(arr, env))
-		ft_free_char_arr(&arr);
+	// if (!replace_tilde_in_av(arr, env))
+	// 	ft_free_char_arr(&arr);
 	return (arr);
 }
