@@ -25,26 +25,26 @@ char				*ft_get_key(char *str)
 	ft_memcpy(key, str, i);
 	return (key);
 }
-
-void				ft_init_ev(t_ev **ev, char **env)
-{
-	char			*key;
-	char			*pos;
-	char			**val;
-
-	key = NULL;
-	val = NULL;
-	while (*env)
-	{
-		key = ft_get_key(*env);
-		if ((pos = ft_strrchr(*env, '=')))
-			val = ft_strsplit(&pos[1], ':');
-		else
-			val = NULL;
-		ft_push_ev(ev, key, val);
-		env++;
-		ft_del_arr(val);
-		free(val);
-		free(key);
-	}
-}
+//
+//void				ft_init_ev(t_ev **ev, char **env)
+//{
+//	char			*key;
+//	char			*pos;
+//	char			**val;
+//
+//	key = NULL;
+//	val = NULL;
+//	while (*env)
+//	{
+//		key = ft_get_key(*env);
+//		if ((pos = ft_strrchr(*env, '=')))
+//			val = ft_strsplit(&pos[1], ':');
+//		else
+//			val = NULL;
+//		ft_push_ev(ev, key, val);
+//		env++;
+//		ft_del_arr(val);
+//		free(val);
+//		free(key);
+//	}
+//}

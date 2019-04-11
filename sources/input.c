@@ -97,7 +97,7 @@ static void	call_functions(char **split, char ***env, t_avl_node **root)
 		print_error_command(split[0]);
 }
 
-int			read_input(t_avl_node **root, char ***env, t_ev **ev)
+int			read_input(t_avl_node **root, char ***env)
 {
 	char		**commands;
 	char		**split;
@@ -105,8 +105,12 @@ int			read_input(t_avl_node **root, char ***env, t_ev **ev)
 	char		*input_str;
 
 	//handle_signals();
-	input_str = ft_new_while(ev);
+	input_str = ft_new_while();
+	// ---
+	ft_putstr("Ya vernul: ");
 	ft_putstr(input_str);
+	ft_putstr("\n");
+	// ---
 	commands = divide_commands(&input_str);
 	tmp = commands;
 	if (tmp)

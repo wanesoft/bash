@@ -12,22 +12,22 @@
 
 #include "21sh.h"
 
-void				ft_autocompl_2(char str[B_SIZE], int *j, char **files)
+void				ft_autocompl_2(char str[B_SIZE], int *j)
 {
 	int				i;
 
 	i = 0;
-	while (files[i])
+	while (g_commands[i])
 	{
-		if (ft_strnequ(str, files[i], ((*j))))
+		if (ft_strnequ(str, g_commands[i], ((*j))))
 		{
-			ft_memcpy(str, files[i], ft_strlen(files[i]) + 1);
+			ft_memcpy(str, g_commands[i], ft_strlen(g_commands[i]) + 1);
 			break ;
 		}
 		i++;
 	}
-	if (files[i])
-		(*j) = (int)ft_strlen(files[i]);
+	if (g_commands[i])
+		(*j) = (int)ft_strlen(g_commands[i]);
 	ft_putstr_fd(tgetstr("dl", NULL), TESTTT);
 	ft_putstr_fd(tgetstr("cr", NULL), TESTTT);
 }

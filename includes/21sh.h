@@ -47,7 +47,7 @@
 # define K_DEL			2117294875
 # define K_BACKSP		127
 
-char	**g_commands;
+extern char		**g_commands;
 
 typedef struct	s_exec
 {
@@ -56,17 +56,17 @@ typedef struct	s_exec
 	struct s_exec	*next;
 }				t_exec;
 
-typedef struct		s_ev
-{
-	char			*key;
-	char			**val;
-	struct s_ev		*next;
-}					t_ev;
+//typedef struct		s_ev
+//{
+//	char			*key;
+//	char			**val;
+//	struct s_ev		*next;
+//}					t_ev;
 
 t_avl_node		*ft_bins_from_env(char **env);
 char			**copy_env(char **env);
 
-int				read_input(t_avl_node **root, char ***env, t_ev **ev);
+int				read_input(t_avl_node **root, char ***env);
 
 char			**spec_split(char *s, char **env);
 
@@ -91,13 +91,14 @@ char			*commands_generator(const char *text, int state);
 char			**commands_completion(const char *text, int start, int end);
 
 void			ft_init_screen(void);
-char			*ft_new_while(t_ev **ev);
-void			ft_autocompl(t_ev *ev, char str[B_SIZE], int *j);
-void			ft_autocompl_2(char str[B_SIZE], int *j, char **files);
+char			*ft_new_while(void);
+//void			ft_autocompl(t_ev *ev, char str[B_SIZE], int *j);
+void			ft_autocompl(char str[B_SIZE], int *j);
+void			ft_autocompl_2(char str[B_SIZE], int *j);
 void			ft_back_screen(struct termios *old);
-void			ft_push_ev(t_ev **frst, char *key, char **val);
+void			ft_push_ev(char *key, char **val);
 void			ft_del_arr(char **arr);
-void			ft_init_ev(t_ev **ev, char **env);
+void			ft_init_ev(char **env);
 int				ft_count_arr(char **arr);
 void			ft_main_sig(int signo);
 void			ft_proc_sig(int signo);

@@ -61,7 +61,7 @@ static void			ft_i_bksp(char *str, int *g_j)
 	ft_putstr_fd(tgetstr("cr", NULL), TESTTT);
 }
 
-char				*ft_new_while(t_ev **ev)
+char				*ft_new_while()
 {
 	unsigned long	i;
 
@@ -78,10 +78,15 @@ char				*ft_new_while(t_ev **ev)
 			ft_i_enter(g_str);
 			return (g_str);
 		}
+//		else if (i == 'p')
+//		{
+//			for (int w = 0; g_commands[w]; w++)
+//				ft_putstr(g_commands[w]);
+//		}
 		else if (i == K_ESC)
 			break ;
 		else if (i == '\t')
-			ft_autocompl(*ev, g_str, &g_j);
+			ft_autocompl(g_str, &g_j);
 		else if (i == K_BACKSP)
 			ft_i_bksp(g_str, &g_j);
 		else if (ft_isprint((int)i))

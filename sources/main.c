@@ -22,39 +22,41 @@
 **sig_t		signal(int sig, sig_t func);
 */
 
+char				**g_commands;
+
 int					main(int ac, char **av, char **source_env)
 {
 	t_avl_node		*root;
 	char			**env;
 	struct termios	old;
-	t_ev			*ev;
-	t_ev			*trash;
+//	t_ev			*ev;
+//	t_ev			*trash;
 
 	(void)ac;
 	(void)av;
-	ev = NULL;
+//	ev = NULL;
 	env = copy_env(source_env);
 	root = ft_bins_from_env(env);
 	fill_g_commands(root);
 	tcgetattr(STDIN_FILENO, &old);
-	ft_init_ev(&ev, source_env);
+//	ft_init_ev(&ev, source_env);
 	ft_init_screen();
 	while (1)
 	{
-		if (!read_input(&root, &env, &ev))
+		if (!read_input(&root, &env))
 			break ;
 	}
 	ft_avl_iter_post_order(root, &ft_avl_free_node);
 	ft_back_screen(&old);
 	//free ev
-	while (ev)
-	{
-		trash = ev;
-		ft_del_arr(trash->val);
-		free(trash->val);
-		free(trash->key);
-		ev = ev->next;
-		free(trash);
-	}
+//	while (ev)
+//	{
+//		trash = ev;
+//		ft_del_arr(trash->val);
+//		free(trash->val);
+//		free(trash->key);
+//		ev = ev->next;
+//		free(trash);
+//	}
 	return (0);
 }
