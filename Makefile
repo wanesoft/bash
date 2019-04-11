@@ -31,7 +31,7 @@ SRCS_LEXER=\
 	spec_split.c
 
 SRCS_WITHOUT_DIR=\
-	autocompletion.c\
+	fill_g_commands.c\
 	environment.c\
 	handle_signals.c\
 	input.c\

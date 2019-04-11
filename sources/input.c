@@ -6,7 +6,7 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 16:03:53 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/07 00:17:34 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:31:33 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,6 @@
 **	return (buf);
 **}
 */
-
-//static char	*get_input_str(void)
-//{
-//	char	*buf;
-//
-//	while (1)
-//	{
-//		buf = readline("$> ");
-//		if (!buf)
-//			break ;
-//		if (ft_strlen(buf))
-//		{
-//			add_history(buf);
-//			return (ft_strdup(buf));
-//		}
-//		free(buf);
-//	}
-//	return (NULL);
-//}
 
 static int	print_error_command(char *s)
 {
@@ -106,8 +87,8 @@ static void	call_functions(char **split, char ***env, t_avl_node **root)
 		ft_setenv(split + 1, env, root);
 	else if (ft_strequ(split[0], "unsetenv"))
 		ft_unsetenv(split + 1, env, root);
-	// else if (ft_strequ(split[0], "hash"))
-	// 	ft_hash(*root);
+	else if (ft_strequ(split[0], "hash"))
+		ft_hash(*root);
 	else if ((node = ft_avl_search(*root, split[0])))
 		call_exec(node->path, split, *env);
 	else if (ft_strchr(split[0], '/'))
