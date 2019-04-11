@@ -34,8 +34,20 @@ void				ft_autocompl_2(char str[B_SIZE], int *j)
 
 void				ft_autocompl(char str[B_SIZE], int *j)
 {
-	ft_autocompl_2(str, j);
-
+	int				i;
+	
+	i = 0;
+	while (g_commands[i])
+	{
+		if (ft_strnequ(str, g_commands[i], *j))
+		{
+			ft_putchar('\n');
+			ft_putstr(g_commands[i]);
+		}
+		i++;
+	}
+	ft_putchar('\n');
+	ft_autocompl_2(str, j);	
 	ft_putstr_fd(tgetstr("dl", NULL), TESTTT);
 	ft_putstr_fd(tgetstr("cr", NULL), TESTTT);
 }
