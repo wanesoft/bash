@@ -37,10 +37,7 @@ SRCS_WITHOUT_DIR=\
 	input.c\
 	main.c\
 	ft_work_arr.c\
-	ft_work_ev.c\
-	ft_init_ev.c\
 	ft_back_screen.c\
-	ft_autocompl_2.c\
 	ft_autocompl.c\
 	ft_init_screen.c\
 	ft_new_while.c

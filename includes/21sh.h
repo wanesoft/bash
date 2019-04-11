@@ -94,7 +94,6 @@ void			ft_init_screen(void);
 char			*ft_new_while(void);
 //void			ft_autocompl(t_ev *ev, char str[B_SIZE], int *j);
 void			ft_autocompl(char str[B_SIZE], int *j);
-void			ft_autocompl_2(char str[B_SIZE], int *j);
 void			ft_back_screen(struct termios *old);
 void			ft_push_ev(char *key, char **val);
 void			ft_del_arr(char **arr);
