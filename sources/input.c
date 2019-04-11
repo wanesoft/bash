@@ -125,7 +125,7 @@ int			read_input(t_avl_node **root, char ***env, t_ev **ev)
 
 	//handle_signals();
 	input_str = ft_new_while(ev);
-	//ft_putstr(input_str);
+	ft_putstr(input_str);
 	commands = divide_commands(&input_str);
 	tmp = commands;
 	if (tmp)
