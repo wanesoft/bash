@@ -21,7 +21,7 @@ static char			**ft_get_gcom_arr(char str[B_SIZE], int *j)
 	count = 0;;
 	i = 0;
 	arr = NULL;
-	while (g_commands[i])
+	while (g_commands && g_commands[i])
 	{
 		if (ft_strnequ(str, g_commands[i], *j))
 		{
