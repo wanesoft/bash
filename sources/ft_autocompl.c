@@ -76,9 +76,10 @@ static void			ft_autocompl_2(char str[B_SIZE], int *j, char **arr_gcom)
 			++jj;
 		++i;
 	}
-	if (jj == ft_count_arr(arr_gcom))
-	{
+	if (i)
 		--i;
+	if (jj == ft_count_arr(arr_gcom) && arr_gcom[i][*j] != '\0')
+	{
 		str[*j] = arr_gcom[i][*j];
 		*j = *j + 1;
 		ft_autocompl_2(str, j, arr_gcom);
@@ -106,6 +107,7 @@ void				ft_autocompl(char str[B_SIZE], int *j)
 		i++;
 	}
 	ft_autocompl_2(str, j, arr_gcom);
+	str[*j] = '\0';
 	free(arr_gcom);
 	//del arr_gcom
 	ft_putstr_fd(tgetstr("dl", NULL), TESTTT);
