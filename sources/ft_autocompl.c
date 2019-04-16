@@ -12,7 +12,7 @@
 
 #include "21sh.h"
 
-static char			**ft_get_gcom_arr(char str[B_SIZE], int *j)
+static char			**ft_get_gcom_arr(char str[B_SIZE])
 {
 	char			**arr;
 	int				i;
@@ -23,7 +23,8 @@ static char			**ft_get_gcom_arr(char str[B_SIZE], int *j)
 	arr = NULL;
 	while (g_commands && g_commands[i])
 	{
-		if (ft_strnequ(str, g_commands[i], *j))
+//		if (ft_strnequ(str, g_commands[i], *j))
+		if (ft_strnequ(str, g_commands[i], ft_strlen(str)))
 		{
 			count++;
 			if (count == 1)
@@ -43,6 +44,21 @@ static char			**ft_get_gcom_arr(char str[B_SIZE], int *j)
 	return (arr);
 }
 
+static int			ft_find_ws(char str[B_SIZE])
+{
+	int				i;
+	
+	i = 0;
+	while (str[i])
+		i++;
+	while (i >= 0)
+	{
+		if (str[i] == ' ')
+			return (i + 1);
+		--i;
+	}
+	return (0);
+}
 //void				ft_autocompl_2(char str[B_SIZE], int *j)
 //{
 //	int				i;
@@ -67,20 +83,22 @@ static void			ft_autocompl_2(char str[B_SIZE], int *j, char **arr_gcom)
 {
 	int				i;
 	int				jj;
+	int				len;
 	
 	jj = 1;
 	i = 0;
+	len = (int)ft_strlen(str);
 	while (arr_gcom && arr_gcom[i])
 	{
-		if (arr_gcom[i + 1] && arr_gcom[i][*j] == arr_gcom[i + 1][*j])
+		if (arr_gcom[i + 1] && arr_gcom[i][len] == arr_gcom[i + 1][len])
 			++jj;
 		++i;
 	}
 	if (i)
 		--i;
-	if (jj == ft_count_arr(arr_gcom) && arr_gcom[i][*j] != '\0')
+	if (jj == ft_count_arr(arr_gcom) && arr_gcom[i][len] != '\0')
 	{
-		str[*j] = arr_gcom[i][*j];
+		str[len] = arr_gcom[i][len];
 		*j = *j + 1;
 		ft_autocompl_2(str, j, arr_gcom);
 	}
@@ -93,20 +111,22 @@ void				ft_autocompl(char str[B_SIZE], int *j)
 	int				i;
 	char			**arr_gcom;
 	int				k;
+	int				ws;
 	
-	arr_gcom = ft_get_gcom_arr(str, j);
+	ws = ft_find_ws(str);
+	arr_gcom = ft_get_gcom_arr(&str[ws]);
 	i = 0;
 	k = 0;
 	while (arr_gcom && g_commands[i])
 	{
-		if (ft_strnequ(str, g_commands[i], *j))
+		if (ft_strnequ(&str[ws], g_commands[i], ft_strlen(&str[ws])))
 		{
 			arr_gcom[k] = ft_strdup(g_commands[i]);
 			k++;
 		}
 		i++;
 	}
-	ft_autocompl_2(str, j, arr_gcom);
+	ft_autocompl_2(&str[ws], j, arr_gcom);
 	str[*j] = '\0';
 	free(arr_gcom);
 	//del arr_gcom
