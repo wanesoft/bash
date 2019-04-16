@@ -78,11 +78,6 @@ char				*ft_new_while()
 			ft_i_enter(g_str);
 			return (g_str);
 		}
-//		else if (i == 'p')
-//		{
-//			for (int w = 0; g_commands[w]; w++)
-//				ft_putstr(g_commands[w]);
-//		}
 		else if (i == K_ESC)
 			break ;
 		else if (i == '\t')
