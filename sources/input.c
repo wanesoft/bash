@@ -6,46 +6,15 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 16:03:53 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/10 17:31:33 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/17 00:57:05 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-/*
-**static char	*get_input_str(void)
-**{
-**	size_t	i;
-**	size_t	buf_size;
-**	char	*buf;
-**	char	c;
-**
-**	i = 0;
-**	buf_size = BUF_SIZE;
-**	buf = ft_strnew(buf_size);
-**	ft_putstr_len("$> ", 3);
-**	while (1)
-**	{
-**		c = getchar();
-**		if (c == '\n')
-**			break ;
-**		else if (c == '\t')
-**			ft_putendl("Youhoo");
-**		buf[i++] = c;
-**		buf[i] = '\0';
-**		if (i == buf_size)
-**		{
-**			buf_size *= 2;
-**			buf = ft_realloc(buf, buf_size);
-**		}
-**	}
-**	return (buf);
-**}
-*/
-
 static int	print_error_command(char *s)
 {
-	ft_putstr("minishell: command not found: ");
+	ft_putstr("21sh: command not found: ");
 	ft_putendl(s);
 	return (1);
 }
@@ -65,7 +34,7 @@ static int	call_exec(char *path, char **split, char **env)
 	}
 	else
 	{
-		ft_putstr("minishell: permission denied: ");
+		ft_putstr("21sh: permission denied: ");
 		ft_putendl(path);
 	}
 	return (1);
