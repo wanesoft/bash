@@ -23,7 +23,6 @@ static char			**ft_get_gcom_arr(char str[B_SIZE])
 	arr = NULL;
 	while (g_commands && g_commands[i])
 	{
-//		if (ft_strnequ(str, g_commands[i], *j))
 		if (ft_strnequ(str, g_commands[i], ft_strlen(str)))
 		{
 			count++;
@@ -59,25 +58,6 @@ static int			ft_find_ws(char str[B_SIZE])
 	}
 	return (0);
 }
-//void				ft_autocompl_2(char str[B_SIZE], int *j)
-//{
-//	int				i;
-//
-//	i = 0;
-//	while (g_commands[i])
-//	{
-//		if (ft_strnequ(str, g_commands[i], ((*j))))
-//		{
-//			ft_memcpy(str, g_commands[i], ft_strlen(g_commands[i]) + 1);
-//			break ;
-//		}
-//		i++;
-//	}
-//	if (g_commands[i])
-//		(*j) = (int)ft_strlen(g_commands[i]);
-////	ft_putstr_fd(tgetstr("dl", NULL), TESTTT);
-////	ft_putstr_fd(tgetstr("cr", NULL), TESTTT);
-//}
 
 static void			ft_autocompl_2(char str[B_SIZE], int *j, char **arr_gcom)
 {
@@ -102,8 +82,6 @@ static void			ft_autocompl_2(char str[B_SIZE], int *j, char **arr_gcom)
 		*j = *j + 1;
 		ft_autocompl_2(str, j, arr_gcom);
 	}
-//	if (g_commands[i])
-//		(*j) = (int)ft_strlen(g_commands[i]);
 }
 
 void				ft_autocompl(char str[B_SIZE], int *j)
@@ -128,8 +106,8 @@ void				ft_autocompl(char str[B_SIZE], int *j)
 	}
 	ft_autocompl_2(&str[ws], j, arr_gcom);
 	str[*j] = '\0';
+	ft_del_arr(arr_gcom);
 	free(arr_gcom);
-	//del arr_gcom
 	ft_putstr_fd(tgetstr("dl", NULL), TESTTT);
 	ft_putstr_fd(tgetstr("cr", NULL), TESTTT);
 }
