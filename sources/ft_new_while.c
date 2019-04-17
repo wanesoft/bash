@@ -15,18 +15,22 @@
 char				g_str[B_SIZE];
 int					g_j = 0;
 
-static void			ft_hello_mess(char *str)
+static void			ft_hello_mess(char *str, unsigned long i)
 {
-	ft_putstr_fd("\033[36mWelcome>\033[0m", TESTTT);
-	ft_putstr_fd(str, TESTTT);
+	if (i != K_LEFT)
+	{
+		ft_putstr_fd("\033[36mWelcome>\033[0m", TESTTT);
+		ft_putstr_fd(str, TESTTT);
+	}
 }
 
 static void			ft_put_let(char *str, int *g_j, unsigned long i)
 {
 	if (!i)
 	{
-		ft_putstr_fd(tgetstr("dl", NULL), TESTTT);
-		ft_putstr_fd(tgetstr("cr", NULL), TESTTT);
+		//ft_putstr_fd(tgoto(tgetstr("cm", NULL), ((*g_j) - g_jj), 50), TESTTT);
+//		ft_putstr_fd(tgetstr("dl", NULL), TESTTT);
+		ft_putstr_fd(tgetstr("le", NULL), TESTTT);
 		return ;
 	}
 	str[*g_j] = i;
@@ -68,11 +72,13 @@ char				*ft_new_while()
 	i = 0;
 	g_str[0] = '\0';
 	g_j = 0;
+	ft_hello_mess(g_str, i);
 	while (1)
 	{
 		signal(SIGINT, ft_main_sig);
-		ft_hello_mess(g_str);
+		
 		read(STDIN_FILENO, &i, 8);
+		
 		if (i == '\n')
 		{
 			ft_i_enter(g_str);
@@ -84,11 +90,14 @@ char				*ft_new_while()
 			ft_autocompl(g_str, &g_j);
 		else if (i == K_BACKSP)
 			ft_i_bksp(g_str, &g_j);
+		else if (i == K_LEFT)
+			ft_put_let(g_str, &g_j, i);
 		else if (ft_isprint((int)i))
 			ft_put_let(g_str, &g_j, i);
 		else
 			ft_put_let(g_str, &g_j, 0);
 		i = 0;
+		ft_hello_mess(g_str, i);
 	}
 	return (0);
 }
