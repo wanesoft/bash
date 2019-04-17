@@ -15,14 +15,14 @@
 char				g_str[B_SIZE];
 int					g_j = 0;
 
-static void			ft_hello_mess(char *str, unsigned long i)
-{
-	if (i != K_LEFT)
-	{
-		ft_putstr_fd("\033[36mWelcome>\033[0m", TESTTT);
-		ft_putstr_fd(str, TESTTT);
-	}
-}
+//static void			ft_hello_mess(char *str, unsigned long i)
+//{
+//	if (i != K_LEFT)
+//	{
+//		ft_putstr_fd("\033[36mWelcome>\033[0m", TESTTT);
+//		ft_putstr_fd(str, TESTTT);
+//	}
+//}
 
 static void			ft_put_let(char *str, int *g_j, unsigned long i)
 {
@@ -36,8 +36,10 @@ static void			ft_put_let(char *str, int *g_j, unsigned long i)
 	str[*g_j] = i;
 	str[*g_j + 1] = '\0';
 	*g_j += 1;
+	//ft_putstr_fd(str, TESTTT);
 	ft_putstr_fd(tgetstr("dl", NULL), TESTTT);
-	ft_putstr_fd(tgetstr("cr", NULL), TESTTT);
+	ft_putstr_fd(str, TESTTT);
+	//ft_putstr_fd(tgetstr("cr", NULL), TESTTT);
 }
 
 static void			ft_i_enter(char *str)
@@ -72,11 +74,11 @@ char				*ft_new_while()
 	i = 0;
 	g_str[0] = '\0';
 	g_j = 0;
-	ft_hello_mess(g_str, i);
+	//ft_hello_mess(g_str, i);
 	while (1)
 	{
 		signal(SIGINT, ft_main_sig);
-		
+		//ft_hello_mess(g_str, i);
 		read(STDIN_FILENO, &i, 8);
 		
 		if (i == '\n')
@@ -97,7 +99,7 @@ char				*ft_new_while()
 		else
 			ft_put_let(g_str, &g_j, 0);
 		i = 0;
-		ft_hello_mess(g_str, i);
+		
 	}
 	return (0);
 }
