@@ -3,6 +3,7 @@
 
 # Output file
 21sh
+a.out
 
 # Temporary files
 *.DS_Store

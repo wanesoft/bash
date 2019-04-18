@@ -20,7 +20,7 @@ OBJS_DIR=./objects/
 COMMANDS_DIR=commands/
 LEXER_DIR=lexer/
 
-SRCS_COMMANDS=\
+SRCS_COMMANDS=call_exec.c\
 	ft_cd.c		ft_echo.c		ft_env.c\
 	ft_hash.c	ft_setenv.c		ft_unsetenv.c
 
@@ -102,5 +102,9 @@ endif
 
 test:
 	gcc $(FLAGS) -g $(SRCS) -o $(NAME) $(INCLUDES) $(LIBFT_A) -lreadline -ltermcap
+
+pipe:
+	gcc -g sources/pipes_or_redirections/handle_pipe.c -I includes -I libft/includes libft/libft.a
+	./a.out
 
 re: fclean all

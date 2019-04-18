@@ -6,7 +6,7 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:48:37 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/10 17:26:21 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/18 16:52:30 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ int				read_input(t_avl_node **root, char ***env);
 char			**spec_split(char *s, char **env);
 
 char			**divide_commands(char **s);
+
+void			call_functions(char **split, char ***env, t_avl_node **root);
+int				call_exec(char *path, char **split, char **env);
 
 int				ft_cd(char **av, char ***env);
 int				ft_echo(char **av);
