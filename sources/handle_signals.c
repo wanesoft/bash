@@ -34,6 +34,7 @@
 
 extern char			g_str[B_SIZE];
 extern int			g_j;
+extern int			g_pos;
 
 void				ft_main_sig(int signo)
 {
