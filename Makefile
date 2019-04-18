@@ -20,7 +20,7 @@ OBJS_DIR=./objects/
 COMMANDS_DIR=commands/
 LEXER_DIR=lexer/
 
-SRCS_COMMANDS=call_exec.c\
+SRCS_COMMANDS=call_functions.c\
 	ft_cd.c		ft_echo.c		ft_env.c\
 	ft_hash.c	ft_setenv.c		ft_unsetenv.c
 
