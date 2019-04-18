@@ -40,25 +40,25 @@ static void			ft_i_anoth()
 
 static void			ft_put_let(char *str, int *g_j, unsigned long i)
 {
-	char			tmp;
-	char			tmp2;
-	int				itmp;
-	
-	itmp = g_pos;
-	tmp = str[g_pos];
-	str[g_pos] = i;
-	while (itmp < *g_j)
+	if (*g_j == g_pos)
 	{
-		tmp2 = str[itmp + 1];
-		str[itmp] = tmp;
-		tmp = tmp2;
-		++itmp;
+		str[g_pos] = i;
+		++g_pos;
+		*g_j += 1;
+		str[*g_j] = '\0';
 	}
-	*g_j += 1;
-	++g_pos;
-	str[*g_j] = '\0';
+	else if (*g_j < g_pos)
+		str[0] = 'B';
+	else
+	{
+		char *tmp = ft_strdup(&str[g_pos]);
+		str[g_pos] = i;
+		ft_memcpy(&str[g_pos + 1], tmp, (ft_strlen(tmp) + 1));
+		*g_j += 1;
+		g_pos++;
+		free(tmp);
+	}
 	ft_hello_mess(str);
-	
 }
 
 static void			ft_i_enter(char *str)
@@ -71,7 +71,8 @@ static void			ft_i_enter(char *str)
 	while (str[i] == ' ')
 		i++;
 	//ft_minishell(&str[i], ev);
-}//	str[0] = '\0';
+}
+//	str[0] = '\0';
 //	*g_j = 0;
 
 static void			ft_i_arrows(unsigned long i)
@@ -90,8 +91,6 @@ static void			ft_i_bksp(char *str, int *g_j)
 		str[*g_j - 1] = '\0';
 		*g_j -= 1;
 	}
-	ft_putstr_fd(tgetstr("dl", NULL), TESTTT);
-	ft_putstr_fd(tgetstr("cr", NULL), TESTTT);
 	ft_hello_mess(str);
 }
 
@@ -101,7 +100,6 @@ char				*ft_new_while(void)
 
 	i = 0;
 	ft_bzero(g_str, B_SIZE);
-	//g_str[0] = '\0';
 	g_j = 0;
 	g_pos = 0;
 	ft_hello_mess(g_str);
