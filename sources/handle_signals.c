@@ -41,8 +41,11 @@ void				ft_main_sig(int signo)
 	if (signo == SIGINT)
 	{
 		ft_putstr_fd("\n\033[36mWelcome>\033[0m", 1);
-		g_str[0] = '\0';
+		ft_bzero(g_str, B_SIZE);
+//		g_str[0] = '\0';
 		g_j = 0;
+		g_pos = 0;
+		ft_hello_mess(g_str);
 		signal(SIGINT, ft_main_sig);
 	}
 }

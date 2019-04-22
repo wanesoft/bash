@@ -14,7 +14,7 @@
 
 char				g_str[B_SIZE];
 int					g_j = 0;
-int					g_pos = 1;
+int					g_pos = 0;
 
 void				ft_hello_mess(char *str)
 {
