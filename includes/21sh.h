@@ -104,5 +104,6 @@ void			ft_init_ev(char **env);
 int				ft_count_arr(char **arr);
 void			ft_main_sig(int signo);
 void			ft_proc_sig(int signo);
+void			ft_hello_mess(char *str);
 
 #endif

@@ -16,7 +16,7 @@ char				g_str[B_SIZE];
 int					g_j = 0;
 int					g_pos = 1;
 
-static void			ft_hello_mess(char *str)
+void				ft_hello_mess(char *str)
 {
 	int				tmp;
 	
@@ -79,17 +79,22 @@ static void			ft_i_arrows(unsigned long i)
 {
 	if (i == K_LEFT && g_pos > 0)
 		--g_pos;
-	else if (i == K_RIGHT && g_pos <= g_j)
+	else if (i == K_RIGHT && g_pos < g_j)
 		++g_pos;
 	ft_hello_mess(g_str);
 }
 
 static void			ft_i_bksp(char *str, int *g_j)
 {
-	if (*g_j > 0)
+	char			*tmp;
+	
+	tmp = ft_strdup(str);
+	if (*g_j > 0 && g_pos > 0)
 	{
+		ft_memcpy(&str[g_pos - 1], &tmp[g_pos], ft_strlen(&tmp[g_pos]));
 		str[*g_j - 1] = '\0';
 		*g_j -= 1;
+		--g_pos;
 	}
 	ft_hello_mess(str);
 }

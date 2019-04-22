@@ -12,6 +12,8 @@
 
 #include "21sh.h"
 
+extern int			g_pos;
+
 static char			**ft_get_gcom_arr(char str[B_SIZE])
 {
 	char			**arr;
@@ -80,6 +82,7 @@ static void			ft_autocompl_2(char str[B_SIZE], int *j, char **arr_gcom)
 	{
 		str[len] = arr_gcom[i][len];
 		*j = *j + 1;
+		++g_pos;
 		ft_autocompl_2(str, j, arr_gcom);
 	}
 }
@@ -108,6 +111,5 @@ void				ft_autocompl(char str[B_SIZE], int *j)
 	str[*j] = '\0';
 	ft_del_arr(arr_gcom);
 	free(arr_gcom);
-	ft_putstr_fd(tgetstr("dl", NULL), TESTTT);
-	ft_putstr_fd(tgetstr("cr", NULL), TESTTT);
+	ft_hello_mess(str);
 }
