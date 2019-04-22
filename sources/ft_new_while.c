@@ -95,7 +95,9 @@ static void			ft_i_bksp(char *str, int *g_j)
 		str[*g_j - 1] = '\0';
 		*g_j -= 1;
 		--g_pos;
+//		free(tmp;)
 	}
+	free(tmp);
 	ft_hello_mess(str);
 }
 
