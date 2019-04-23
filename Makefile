@@ -31,8 +31,9 @@ SRCS_LEXER=\
 	spec_split.c
 
 SRCS_WITHOUT_DIR=\
-	fill_g_commands.c\
 	environment.c\
+	fill_g_commands.c\
+	get_list_of_bins.c\
 	handle_signals.c\
 	input.c\
 	main.c\
@@ -54,7 +55,7 @@ NAME_CLEAN=$(strip $(NAME))
 
 LIBFT_A=$(LIBFT_DIR)/libft.a
 INCLUDES:=-I includes -I $(LIBFT_DIR)/includes
-FLAGS=-Wall -Wextra -Werror
+FLAGS=-Wall -Wextra -Werror -g
 
 RED=\033[0;31m
 GREEN=\033[0;32m
@@ -78,7 +79,7 @@ $(LIBFT_A):
 
 $(NAME): $(LIBFT_A) $(OBJS_DIR) $(OBJS)
 	@echo "$(BLUE)Compiling executable...$(NC)"
-	@gcc $(OBJS) $(LIBFT_A) $(INCLUDES) $(FLAGS) -o $(NAME) -lreadline -ltermcap
+	@gcc $(OBJS) $(LIBFT_A) $(INCLUDES) $(FLAGS) -o $(NAME) -ltermcap
 	@echo "$(GREEN)Bin $(NAME) is ready to use!$(NC)"
 
 clean:
@@ -101,10 +102,10 @@ else
 endif
 
 test:
-	gcc $(FLAGS) -g $(SRCS) -o $(NAME) $(INCLUDES) $(LIBFT_A) -lreadline -ltermcap
+	gcc $(FLAGS) -g $(SRCS) -o $(NAME) $(INCLUDES) $(LIBFT_A) -ltermcap
 
 pipe:
-	gcc -g sources/pipes_or_redirections/handle_pipe.c -I includes -I libft/includes libft/libft.a
+	gcc -g sources/pipes_or_redirections/handle_pipe.c -I includes -I libft/includes libft/libft.a sources/commands/ft_echo.c sources/fill_g_commands.c sources/environment.c
 	./a.out
 
 re: fclean all

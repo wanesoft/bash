@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_string.c                                      :+:      :+:    :+:   */
+/*   replace_variable.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 16:25:50 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/01 21:06:17 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/24 01:14:46 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,6 @@ static int	is_double_dollars(char **s, char **str, char **tmp)
 	return (0);
 }
 
-static void	free_src_if_empty_str(char **str, char *src)
-{
-	if (ft_strlen(*str))
-		free(src);
-	else
-		*str = src;
-}
-
 char		*replace_variable(char *src, char **env)
 {
 	char	*s;
@@ -82,7 +74,7 @@ char		*replace_variable(char *src, char **env)
 		handle_variable(&str, s, p, env);
 		tmp = s;
 	}
-	str = ft_strjoin_free(str, ft_strdup(s), 3);
-	free_src_if_empty_str(&str, src);
+	str = ft_strjoin_free(str, s, 1);
+	free(src);
 	return (str);
 }

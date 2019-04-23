@@ -6,7 +6,7 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:13:55 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/03/23 18:36:23 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/23 22:58:23 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 
 typedef struct		s_list
 {
-	char			*content;
-	size_t			content_size;
+	char			*name;
+	char			*path;
+	size_t			name_len;
+	size_t			path_len;
 	struct s_list	*next;
 }					t_list;
 
@@ -46,7 +48,7 @@ void				ft_lst_push_front(t_list **alst, t_list *lst_new);
 void				ft_lstdelone(t_list **alst);
 void				ft_lstdel(t_list **alst);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-t_list				*ft_lstnew(const char *content, size_t len);
+t_list				*ft_lstnew(const char *name, const char *path);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 size_t				ft_lstsize(t_list *lst);
 

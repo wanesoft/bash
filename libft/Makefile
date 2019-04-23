@@ -6,7 +6,7 @@
 #    By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 21:55:04 by ggwin-go          #+#    #+#              #
-#    Updated: 2019/03/26 11:25:27 by ggwin-go         ###   ########.fr        #
+#    Updated: 2019/04/24 00:15:15 by ggwin-go         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRCS_AVL_TREE=ft_avl_str_balance.c		ft_avl_str_free_node.c\
 	ft_avl_str_remove.c					ft_avl_str_search.c
 
 SRCS_LIST=ft_lstdel.c	ft_lstdelone.c	ft_lstiter.c	ft_lst_push_front.c\
-		ft_lstmap.c		ft_lstnew.c		ft_lstsize.c	ft_lst_push_back.c
+		ft_lstnew.c		ft_lstsize.c	ft_lst_push_back.c
 
 SRCS_MEM=ft_bzero.c		ft_memalloc.c	ft_memccpy.c		ft_memchr.c\
 		ft_memcmp.c		ft_memcpy.c		ft_memcpy_rev.c		ft_memdel.c\

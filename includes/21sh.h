@@ -6,7 +6,7 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:48:37 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/18 16:52:30 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/24 00:56:08 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,31 +56,22 @@ typedef struct	s_exec
 	struct s_exec	*next;
 }				t_exec;
 
-//typedef struct		s_ev
-//{
-//	char			*key;
-//	char			**val;
-//	struct s_ev		*next;
-//}					t_ev;
-
-t_avl_node		*ft_bins_from_env(char **env);
 char			**copy_env(char **env);
 
-int				read_input(t_avl_node **root, char ***env);
+int				read_input(t_list **head, char ***env);
 
 char			**spec_split(char *s, char **env);
 
-char			**divide_commands(char **s);
+char			**divide_commands(char *s);
 
-void			call_functions(char **split, char ***env, t_avl_node **root);
-int				call_exec(char *path, char **split, char **env);
+void			call_functions(char **split, char ***env, t_list **head);
 
 int				ft_cd(char **av, char ***env);
 int				ft_echo(char **av);
 int				ft_env(char **av, char **env);
-int				ft_hash(t_avl_node *root);
-int				ft_setenv(char **av, char ***env, t_avl_node **root);
-int				ft_unsetenv(char **av, char ***env, t_avl_node **root);
+int				ft_hash(t_list *head);
+int				ft_setenv(char **av, char ***env, t_list **head);
+int				ft_unsetenv(char **av, char ***env, t_list **head);
 
 char			**get_args(void);
 char			*replace_variable(char *str, char **env);
@@ -89,7 +80,9 @@ char			*replace_tilde(char *av, char **env,
 
 void			handle_signals(void);
 
-void			fill_g_commands(t_avl_node *root);
+t_list			*get_list_of_bins(char **env);
+
+void			fill_g_commands(t_list *head);
 char			*commands_generator(const char *text, int state);
 char			**commands_completion(const char *text, int start, int end);
 

@@ -6,35 +6,38 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 22:32:39 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/10 17:29:17 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/23 23:22:33 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-static void	print_commands(t_avl_node *root, const char *k)
+static void	print_commands(t_list *head, const char *k)
 {
-	t_avl_node	*node;
-
-	node = ft_avl_search(root, k);
-	if (node)
+	while (head)
 	{
-		ft_putstr(node->key);
+		if (ft_strequ(head->name, k))
+			break ;
+		head = head->next;
+	}
+	if (head)
+	{
+		ft_putstr(head->name);
 		write(1, "=", 1);
-		ft_putendl(node->path);
+		ft_putendl(head->path);
 	}
 }
 
-int			ft_hash(t_avl_node *root)
+int			ft_hash(t_list *head)
 {
 	char	**tmp;
 
-	if (root)
+	if (head)
 	{
 		tmp = g_commands;
 		while (*tmp)
 		{
-			print_commands(root, *tmp);
+			print_commands(head, *tmp);
 			++tmp;
 		}
 	}

@@ -6,20 +6,20 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 22:41:23 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/18 16:53:10 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/24 00:12:09 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-static int	print_error_command(char *s)
+static int		print_error_command(char *s)
 {
 	ft_putstr("21sh: command not found: ");
 	ft_putendl(s);
 	return (1);
 }
 
-int	call_exec(char *path, char **split, char **env)
+static int		call_exec(char *path, char **split, char **env)
 {
 	pid_t	my_pid;
 
@@ -40,9 +40,27 @@ int	call_exec(char *path, char **split, char **env)
 	return (1);
 }
 
-void	call_functions(char **split, char ***env, t_avl_node **root)
+static t_list	*search_command(t_list *head, char *name)
 {
-	t_avl_node	*node;
+	char	*tmp;
+
+	tmp = ft_strchr(name, '/');
+	if (!tmp)
+		tmp = name;
+	while (head)
+	{
+		if (ft_strequ(tmp, head->name))
+			break ;
+		head = head->next;
+	}
+	if (head)
+		return (head);
+	return (NULL);
+}
+
+void			call_functions(char **split, char ***env, t_list **head)
+{
+	t_list *tmp;
 
 	if (ft_strequ(split[0], "exit"))
 		exit(EXIT_SUCCESS);
@@ -53,13 +71,13 @@ void	call_functions(char **split, char ***env, t_avl_node **root)
 	else if (ft_strequ(split[0], "env"))
 		ft_env(split + 1, *env);
 	else if (ft_strequ(split[0], "setenv"))
-		ft_setenv(split + 1, env, root);
+		ft_setenv(split + 1, env, head);
 	else if (ft_strequ(split[0], "unsetenv"))
-		ft_unsetenv(split + 1, env, root);
+		ft_unsetenv(split + 1, env, head);
 	else if (ft_strequ(split[0], "hash"))
-		ft_hash(*root);
-	else if ((node = ft_avl_search(*root, split[0])))
-		call_exec(node->path, split, *env);
+		ft_hash(*head);
+	else if ((tmp = search_command(*head, split[0])))
+		call_exec(tmp->path, split, *env);
 	else if (ft_strchr(split[0], '/'))
 		call_exec(split[0], split, *env);
 	else

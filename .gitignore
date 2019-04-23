@@ -1,3 +1,6 @@
+# Valgrind checklist
+valgrind-out.txt
+
 # For VS Code debug
 .vscode/
 

@@ -6,7 +6,7 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:30:50 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/10 17:26:45 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/24 00:26:47 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char				**g_commands;
 
 int					main(int ac, char **av, char **source_env)
 {
-	t_avl_node		*root;
+	t_list 			*head;
 	char			**env;
 	struct termios	old;
 //	t_ev			*ev;
@@ -36,17 +36,16 @@ int					main(int ac, char **av, char **source_env)
 	(void)av;
 //	ev = NULL;
 	env = copy_env(source_env);
-	root = ft_bins_from_env(env);
-	fill_g_commands(root);
+	head = get_list_of_bins(env);
+	fill_g_commands(head);
 	tcgetattr(STDIN_FILENO, &old);
 //	ft_init_ev(&ev, source_env);
 	ft_init_screen();
 	while (1)
 	{
-		if (!read_input(&root, &env))
+		if (!read_input(&head, &env))
 			break ;
 	}
-	ft_avl_iter_post_order(root, &ft_avl_free_node);
 	ft_back_screen(&old);
 	//free ev
 //	while (ev)
@@ -58,5 +57,7 @@ int					main(int ac, char **av, char **source_env)
 //		ev = ev->next;
 //		free(trash);
 //	}
-	return (0);
+	ft_lstdel(&head);
+	ft_free_char_arr(&g_commands);
+	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/17 22:04:36 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/10 17:32:41 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/23 23:24:40 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	replace_var(char *av, char **tmp, char ***env)
 		*env = (char **)ft_vector_add((void **)*env, (void *)var);
 }
 
-int			ft_setenv(char **av, char ***env, t_avl_node **root)
+int			ft_setenv(char **av, char ***env, t_list **head)
 {
 	char	*p;
 	char	**tmp;
@@ -45,9 +45,9 @@ int			ft_setenv(char **av, char ***env, t_avl_node **root)
 		if (ft_strnequ(*av, "PATH=", 5))
 		{
 			ft_free_char_arr(&g_commands);
-			ft_avl_iter_post_order(*root, &ft_avl_free_node);
-			*root = ft_bins_from_env(*env);
-			fill_g_commands(*root);
+			ft_lstdel(head);
+			*head = get_list_of_bins(*env);
+			fill_g_commands(*head);
 		}
 		++av;
 	}
