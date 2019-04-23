@@ -32,12 +32,6 @@ void				ft_hello_mess(char *str)
 	}
 }
 
-static void			ft_i_anoth()
-{
-	int i = 0;
-	++i;
-}
-
 static void			ft_put_let(char *str, int *g_j, unsigned long i)
 {
 	if (*g_j == g_pos)
@@ -61,19 +55,16 @@ static void			ft_put_let(char *str, int *g_j, unsigned long i)
 	ft_hello_mess(str);
 }
 
-static void			ft_i_enter(char *str)
+static char			*ft_i_enter(char *str)
 {
 	int				i;
 
 	i = 0;
 	write(1, "\n", TESTTT);
-	//ft_tolower_str(&str);
 	while (str[i] == ' ')
 		i++;
-	//ft_minishell(&str[i], ev);
+	return (str);
 }
-//	str[0] = '\0';
-//	*g_j = 0;
 
 static void			ft_i_arrows(unsigned long i)
 {
@@ -81,6 +72,10 @@ static void			ft_i_arrows(unsigned long i)
 		--g_pos;
 	else if (i == K_RIGHT && g_pos < g_j)
 		++g_pos;
+	else if (i == K_HOME && g_pos > 0)
+		g_pos = 0;
+	else if (i == K_END && g_pos < g_j)
+		g_pos = g_j;
 	ft_hello_mess(g_str);
 }
 
@@ -113,26 +108,20 @@ char				*ft_new_while(void)
 	while (1)
 	{
 		signal(SIGINT, ft_main_sig);
-		//ft_hello_mess(g_str, i);
 		read(STDIN_FILENO, &i, 8);
-		//printf("%lu\n", i);
+//		printf("%lu\n", i);
 		if (i == '\n')
-		{
-			ft_i_enter(g_str);
-			return (g_str);
-		}
+			return (ft_i_enter(g_str));
 		else if (i == K_ESC)
 			break ;
 		else if (i == '\t')
 			ft_autocompl(g_str, &g_j);
 		else if (i == K_BACKSP)
 			ft_i_bksp(g_str, &g_j);
-		else if (i == K_LEFT || i == K_RIGHT)
+		else if (i == K_LEFT || i == K_RIGHT || i == K_HOME || i == K_END)
 			ft_i_arrows(i);
 		else if (ft_isprint((int)i))
 			ft_put_let(g_str, &g_j, i);
-		else
-			ft_i_anoth();
 		i = 0;
 	}
 	return (0);

@@ -46,6 +46,8 @@
 # define K_ENTER		10
 # define K_DEL			2117294875
 # define K_BACKSP		127
+# define K_HOME			4741915
+# define K_END			4610843
 
 extern char		**g_commands;
 
