@@ -6,7 +6,7 @@
 #    By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 21:55:04 by ggwin-go          #+#    #+#              #
-#    Updated: 2019/04/24 00:15:15 by ggwin-go         ###   ########.fr        #
+#    Updated: 2019/04/24 16:55:32 by ggwin-go         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,19 +19,12 @@ HEADER=includes/libft.h
 SRCS_DIR=sources/
 OBJS_DIR=objects/
 
-AVL_TREE=avl_tree_str/
 LIST=list/
 MEM=memory/
 STR=string/
 OUTPUT=output/
 OTHER=other/
 VECTOR=vector/
-
-SRCS_AVL_TREE=ft_avl_str_balance.c		ft_avl_str_free_node.c\
-	ft_avl_str_height.c					ft_avl_str_init.c\
-	ft_avl_str_insert.c					ft_avl_str_iter_in_order.c\
-	ft_avl_str_iter_post_order.c		ft_avl_str_iter_pre_order.c\
-	ft_avl_str_remove.c					ft_avl_str_search.c
 
 SRCS_LIST=ft_lstdel.c	ft_lstdelone.c	ft_lstiter.c	ft_lst_push_front.c\
 		ft_lstnew.c		ft_lstsize.c	ft_lst_push_back.c
@@ -67,8 +60,7 @@ SRCS_OTHER=ft_range.c
 
 SRCS_VECTOR=ft_vector_add.c		ft_vector_remove.c
 
-SOURCES=$(addprefix $(AVL_TREE), $(SRCS_AVL_TREE))\
-	$(addprefix $(LIST), $(SRCS_LIST))\
+SOURCES=$(addprefix $(LIST), $(SRCS_LIST))\
 	$(addprefix $(MEM), $(SRCS_MEM))\
 	$(addprefix $(STR), $(SRCS_STR))\
 	$(addprefix $(OUTPUT), $(SRCS_OUTPUT))\
@@ -88,7 +80,6 @@ all: $(NAME)
 
 $(OBJS_DIR):
 	@echo "$(BLUE)Compiling $(NAME_CLEAN:.a=) objects files...$(NC)"
-	@mkdir -p $(OBJS_DIR)$(AVL_TREE)
 	@mkdir -p $(OBJS_DIR)$(LIST)
 	@mkdir -p $(OBJS_DIR)$(MEM)
 	@mkdir -p $(OBJS_DIR)$(STR)
