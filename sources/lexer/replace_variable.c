@@ -6,7 +6,7 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 16:25:50 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/24 01:14:46 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/24 16:47:27 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,5 @@ char		*replace_variable(char *src, char **env)
 		tmp = s;
 	}
 	str = ft_strjoin_free(str, s, 1);
-	free(src);
 	return (str);
 }
