@@ -6,12 +6,12 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:48:37 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/24 16:55:52 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/24 17:30:19 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef OWN_SHELL_H
+# define OWN_SHELL_H
 
 # include "libft.h"
 # include "ft_vector.h"
@@ -47,6 +47,9 @@
 # define K_BACKSP		127
 # define K_HOME			4741915
 # define K_END			4610843
+
+# define FD_FOR_READ	0
+# define FD_FOR_WRITE	1
 
 extern char		**g_commands;
 

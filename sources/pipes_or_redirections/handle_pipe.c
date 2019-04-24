@@ -6,11 +6,13 @@
 /*   By: ggwin-go <ggwin-go@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 13:42:48 by ggwin-go          #+#    #+#             */
-/*   Updated: 2019/04/23 18:17:44 by ggwin-go         ###   ########.fr       */
+/*   Updated: 2019/04/24 18:51:42 by ggwin-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
+
+char				**g_commands;
 
 static int	print_error_command(char *s)
 {
@@ -51,49 +53,54 @@ void	ft_call_functions(char **split, char ***env)
 
 int		handle_pipe(char **s1, char **s2, char **res, char **env)
 {
-	ssize_t	rd;
-	char	buf[BUF_SIZE + 1];
-	char	*response;
-	int		fd[2];
+	int		pipefd[2];
+	pid_t	pid1;
+	pid_t	pid2;
 
-	if (pipe(fd) < 0)
+	if (pipe(pipefd) < 0)
 	{
 		ft_putstr("Error with pipe() in ");
 		perror(*s1);
 		exit(1);
 	}
-	response = NULL;
-	printf("\nFirst command:\n\n");
-	dup2(STDOUT_FILENO, fd[1]);
-	close(STDOUT_FILENO);
-	ft_call_functions(s1, &env);
-	dup2(fd[1], STDOUT_FILENO);
-	close(fd[1]);
-	printf("\nSecond command:\n\n");
-	while ((rd = read(fd[0], buf, BUF_SIZE)))
+	if ((pid1 = fork()) == 0)
 	{
-		buf[rd] = '\0';
-		response = ft_strjoin_free(response, buf, 1);
+		dup2(pipefd[FD_FOR_WRITE], STDOUT_FILENO);
+		close(pipefd[FD_FOR_READ]);
+		ft_call_functions(s1, &env);
+		return (1);
 	}
-	close(fd[0]);
-	// ft_putstr(response);
-	*res = response;
-	ft_call_functions(s2, &env);
+	if ((pid2 = fork()) == 0)
+	{
+		dup2(pipefd[FD_FOR_READ], STDIN_FILENO);
+		close(pipefd[FD_FOR_WRITE]);
+		ft_call_functions(s2, &env);
+		return (1);
+	}
+	close(pipefd[FD_FOR_READ]);
+	close(pipefd[FD_FOR_WRITE]);
+	wait(NULL);
+	waitpid(pid2, NULL, 0);
 	return (1);
 }
 
-int     main(int ac, char **av, char **env)
+int     main(int ac, char **av, char **source_env)
 {
-	char	*s1[4] = {"/bin/cat", "author", NULL};
-	// char	*s1[4] = {"/bin/ls", ".", NULL};
-	char	*s2[4] = {"/bin/ls", ".", NULL};
+	char	*s1[] = {"/bin/ls", "-lh", NULL};
+	// char	*s2[] = {"/usr/bin/wc", "-l", NULL};
+	char	*s2[] = {"/bin/cat", "-e", NULL};
 	char	*res;
+	t_list	*head;
+	char	**env;
 
 	res = NULL;
 	(void)ac;
 	(void)av;
-	printf("%s\n", res);
+	env = copy_env(source_env);
+	head = get_list_of_bins(env);
+	fill_g_commands(head);
+	// printf("%s\n", res);
     handle_pipe(s1, s2, &res, env);
-	printf("\n%s\n", res);
+	// printf("\n%s\n", res);
     return (0);
 }
