@@ -113,7 +113,7 @@ char				*ft_new_while(void)
 		if (i == '\n')
 			return (ft_i_enter(g_str));
 		else if (i == K_ESC)
-			break ;
+			exit(EXIT_SUCCESS) ;
 		else if (i == '\t')
 			ft_autocompl(g_str, &g_j);
 		else if (i == K_BACKSP)

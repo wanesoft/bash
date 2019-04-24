@@ -25,7 +25,7 @@ static char			**ft_get_gcom_arr(char str[B_SIZE])
 	arr = NULL;
 	while (g_commands && g_commands[i])
 	{
-		if (ft_strnequ(str, g_commands[i], ft_strlen(str)))
+		if (ft_strnequ(str, g_commands[i], ft_strlen(str)) && str[0])
 		{
 			count++;
 			if (count == 1)
@@ -41,7 +41,8 @@ static char			**ft_get_gcom_arr(char str[B_SIZE])
 		arr = (char **)malloc(sizeof(char *) * (count + 1));
 		arr[count] = NULL;
 	}
-	ft_putchar('\n');
+	if (str[0])
+		ft_putchar('\n');
 	return (arr);
 }
 
