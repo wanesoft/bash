@@ -21,7 +21,7 @@ int			read_input(t_list **head, char ***env)
 	char		*str;
 
 	//handle_signals();
-	input_str = ft_new_while();
+	input_str = ft_new_while(0);
 	// ---
 	// ft_putstr("Ya vernul: ");
 	// ft_putstr(input_str);

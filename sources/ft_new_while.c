@@ -19,8 +19,23 @@ int					g_pos = 0;
 void				ft_hello_mess(char *str)
 {
 	int				tmp;
+	int				bksl;
+	int				i;
 	
+	bksl = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			++bksl;
+		++i;
+	}
 	tmp = g_pos;
+	while (bksl)
+	{
+		ft_putstr_fd(tgetstr("up", NULL), TESTTT);
+		--bksl;
+	}
 	ft_putstr_fd(tgetstr("dl", NULL), TESTTT);
 	ft_putstr_fd(tgetstr("cr", NULL), TESTTT);
 	ft_putstr_fd("\033[36mWelcome>\033[0m", TESTTT);
@@ -55,15 +70,28 @@ static void			ft_put_let(char *str, int *g_j, unsigned long i)
 	ft_hello_mess(str);
 }
 
-static char			*ft_i_enter(char *str)
+static char			*ft_i_enter(char *str, int *g_j)
 {
 	int				i;
-
+	int				l;
+	
+	l = 0;
 	i = 0;
 	write(1, "\n", TESTTT);
-	while (str[i] == ' ')
-		i++;
-	return (str);
+	while (str[i])
+	{
+		if (str[i] == '"')
+			++l;
+		++i;
+	}
+	if (l && l % 2 != 0)
+	{
+		ft_put_let(str, g_j, '\n');
+		ft_new_while(1);
+	}
+	else
+		return (g_str);
+	return (g_str);
 }
 
 static void			ft_i_arrows(unsigned long i)
@@ -96,22 +124,25 @@ static void			ft_i_bksp(char *str, int *g_j)
 	ft_hello_mess(str);
 }
 
-char				*ft_new_while(void)
+char				*ft_new_while(int flag)
 {
 	unsigned long	i;
 
 	i = 0;
-	ft_bzero(g_str, B_SIZE);
-	g_j = 0;
-	g_pos = 0;
-	ft_hello_mess(g_str);
+	if (!flag)
+	{
+		ft_bzero(g_str, B_SIZE);
+		g_j = 0;
+		g_pos = 0;
+		ft_hello_mess(g_str);
+	}
 	while (1)
 	{
 		signal(SIGINT, ft_main_sig);
 		read(STDIN_FILENO, &i, 8);
 //		printf("%lu\n", i);
 		if (i == '\n')
-			return (ft_i_enter(g_str));
+			return (ft_i_enter(g_str, &g_j));
 		else if (i == K_ESC)
 			exit(EXIT_SUCCESS) ;
 		else if (i == '\t')

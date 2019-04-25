@@ -91,7 +91,7 @@ char			*commands_generator(const char *text, int state);
 char			**commands_completion(const char *text, int start, int end);
 
 void			ft_init_screen(void);
-char			*ft_new_while(void);
+char			*ft_new_while(int flag);
 //void			ft_autocompl(t_ev *ev, char str[B_SIZE], int *j);
 void			ft_autocompl(char str[B_SIZE], int *j);
 void			ft_back_screen(struct termios *old);

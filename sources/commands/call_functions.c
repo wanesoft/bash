@@ -21,16 +21,20 @@ static int		print_error_command(char *s)
 
 static int		call_exec(char *path, char **split, char **env)
 {
-	pid_t	my_pid;
+	pid_t	chld; //re ivan
 
 	signal(SIGINT, ft_proc_sig); //rewrite ivan
 	if (!access(path, X_OK))
 	{
-		my_pid = fork();
-		if (my_pid > 0)
-			wait(NULL);
-		if (my_pid == 0)
+//		my_pid = fork();
+//		if (my_pid > 0)
+//			wait(NULL);
+//		if (my_pid == 0)
+//			execve(path, split, env);
+		chld = fork();
+		if (!chld)
 			execve(path, split, env);
+		wait(&chld);
 	}
 	else
 	{
