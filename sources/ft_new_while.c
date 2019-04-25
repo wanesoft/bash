@@ -34,12 +34,27 @@ void				ft_hello_mess(char *str)
 	while (bksl)
 	{
 		ft_putstr_fd(tgetstr("up", NULL), TESTTT);
+		ft_putstr_fd(tgetstr("dl", NULL), TESTTT);
 		--bksl;
 	}
 	ft_putstr_fd(tgetstr("dl", NULL), TESTTT);
 	ft_putstr_fd(tgetstr("cr", NULL), TESTTT);
 	ft_putstr_fd("\033[36mWelcome>\033[0m", TESTTT);
-	ft_putstr_fd(str, TESTTT);
+//	ft_putstr_fd(str, TESTTT);
+	i = 0;
+	int count = 0;
+	while (str[i])
+	{
+		ft_putchar(str[i]);
+		if (str[i] == '\n')
+		{
+			++count;
+			ft_putstr_fd("\033[32mStrochka N ", TESTTT);
+			ft_putnbr(count);
+			ft_putstr_fd(" > \033[0m", TESTTT);
+		}
+		++i;
+	}
 	while (g_j > tmp)
 	{
 		ft_putstr_fd(tgetstr("le", NULL), TESTTT);

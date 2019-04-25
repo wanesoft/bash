@@ -23,9 +23,9 @@ int			read_input(t_list **head, char ***env)
 	//handle_signals();
 	input_str = ft_new_while(0);
 	// ---
-	// ft_putstr("Ya vernul: ");
-	// ft_putstr(input_str);
-	// ft_putstr("\n");
+//	 ft_putstr("Ya vernul: ");
+//	 ft_putstr(input_str);
+//	 ft_putstr("\n");
 	// ---
 	commands = divide_commands(input_str);
 	tmp = commands;
