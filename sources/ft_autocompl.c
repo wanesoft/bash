@@ -112,5 +112,5 @@ void				ft_autocompl(char str[B_SIZE], int *j)
 	str[*j] = '\0';
 	ft_del_arr(arr_gcom);
 	free(arr_gcom);
-	ft_hello_mess(str);
+	ft_hello_mess(str, 0);
 }

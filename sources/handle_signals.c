@@ -45,7 +45,7 @@ void				ft_main_sig(int signo)
 //		g_str[0] = '\0';
 		g_j = 0;
 		g_pos = 0;
-		ft_hello_mess(g_str);
+		ft_hello_mess(g_str, 0);
 		signal(SIGINT, ft_main_sig);
 	}
 }
